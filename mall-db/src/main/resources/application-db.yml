@@ -10,7 +10,10 @@ spring:
       url:  jdbc:mysql://localhost:3306/mall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&verifyServerCertificate=false&useSSL=false
       driver-class-name:  com.mysql.jdbc.Driver
       username:  root
-      password:  18404552888
+#     线上密码
+      password:  Syl04!!!!!
+#      本地密码
+#      password:  18404552888
       initial-size:  10
       max-active:  50
       min-idle:  10
