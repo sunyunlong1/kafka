@@ -53,7 +53,7 @@ public class KafkaOrderService {
             int count = 0;
             long l = System.currentTimeMillis();
             flag:
-            while (true) {
+            while (count > 0) {
                 ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
                 for (ConsumerRecord record : records) {
                     try {
