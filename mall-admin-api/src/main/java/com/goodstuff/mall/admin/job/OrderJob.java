@@ -34,11 +34,11 @@ public class OrderJob {
     @Autowired
     private KafkaOrderService kafkaOrderService;
 
-    @Scheduled(fixedDelay = 1 * 60 * 1000)
-    public void checkKafka(){
-        logger.info("开始拉取kafka消息");
-        kafkaOrderService.addOrder();
-    }
+//    @Scheduled(fixedDelay = 1 * 60 * 1000)
+//    public void checkKafka(){
+//        logger.info("开始拉取kafka消息");
+//        kafkaOrderService.addOrder();
+//    }
     /**
      * 自动取消订单
      * <p>
