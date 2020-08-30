@@ -7,6 +7,8 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +24,8 @@ import java.util.Properties;
  **/
 @Component
 public class KafkaOrderService {
+
+    protected static final Logger LOG = LoggerFactory.getLogger(KafkaOrderService.class);
 
     @Autowired
     private LitemallOrderService orderService;
@@ -52,6 +56,7 @@ public class KafkaOrderService {
                 ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
                 for (ConsumerRecord record : records) {
                     try {
+                        LOG.info("日志在这里:"+record);
                         LitemallOrder order = (LitemallOrder) record.value();
                         orderService.add(order);
                         count++;
