@@ -30,12 +30,6 @@ public class KafkaOrderService {
     private static final String BROKER_LIST = "39.100.126.178:9092";
     private static KafkaConsumer<String, String> kafkaConsumer = null;
 
-    static {
-        Properties properties = initConfig();
-        kafkaConsumer = new KafkaConsumer<String, String>(properties);
-        kafkaConsumer.subscribe(Arrays.asList(TOPIC));
-    }
-
     private static Properties initConfig() {
         Properties properties = new Properties();
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, BROKER_LIST);
@@ -48,7 +42,11 @@ public class KafkaOrderService {
 
     public void addOrder() {
         try {
+            Properties properties = initConfig();
+            kafkaConsumer = new KafkaConsumer<String, String>(properties);
+            kafkaConsumer.subscribe(Arrays.asList(TOPIC));
             int count = 0;
+            long l = System.currentTimeMillis();
             flag:
             while (true) {
                 ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
@@ -63,6 +61,10 @@ public class KafkaOrderService {
                     if (count == 5) {
                         break flag;
                     }
+                }
+                long l1 = System.currentTimeMillis();
+                if((l1 - l)/(1000 * 60) > 1){
+                    break flag;
                 }
             }
 

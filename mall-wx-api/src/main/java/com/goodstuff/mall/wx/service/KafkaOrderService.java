@@ -36,11 +36,6 @@ public class KafkaOrderService {
     private static final String BROKER_LIST = "39.100.126.178:9092";
     private static org.apache.kafka.clients.producer.KafkaProducer<String, String> producer = null;
 
-    static {
-        Properties configs = initConfig();
-        producer = new org.apache.kafka.clients.producer.KafkaProducer<String, String>(configs);
-    }
-
     private static Properties initConfig() {
         Properties properties = new Properties();
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BROKER_LIST);
@@ -69,6 +64,9 @@ public class KafkaOrderService {
             order.setOrderPrice(new BigDecimal("510"));
             order.setActualPrice(new BigDecimal("510"));
             order.setGrouponPrice(new BigDecimal(0.00));
+
+            Properties configs = initConfig();
+            producer = new org.apache.kafka.clients.producer.KafkaProducer<String, String>(configs);
 
             ProducerRecord<String, String> record = new ProducerRecord<String, String>(TOPIC, JSONObject.toJSONString(order));
             RecordMetadata recordMetadata = producer.send(record, new Callback() {
