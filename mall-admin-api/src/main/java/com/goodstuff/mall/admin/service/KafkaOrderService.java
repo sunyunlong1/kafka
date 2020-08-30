@@ -1,5 +1,6 @@
 package com.goodstuff.mall.admin.service;
 
+import com.alibaba.fastjson.JSON;
 import com.goodstuff.mall.db.domain.LitemallOrder;
 import com.goodstuff.mall.db.service.LitemallOrderService;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
@@ -57,13 +58,13 @@ public class KafkaOrderService {
                 for (ConsumerRecord record : records) {
                     try {
                         LOG.info("日志在这里:"+record);
-                        LitemallOrder order = (LitemallOrder) record.value();
+                        LitemallOrder order = JSON.parseObject(record.value().toString(), LitemallOrder.class);
                         orderService.add(order);
                         count++;
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    if (count == 5) {
+                    if (count == 1) {
                         break flag;
                     }
                 }

@@ -42,7 +42,9 @@ public class Consumer {
                 ConsumerRecords<String,String> records = kafkaConsumer.poll(100);
                 for(ConsumerRecord record:records){
                     try{
+                        System.out.println("------------------------------");
                         System.out.println(record.value());
+                        System.out.println("------------------------------");
                     }catch(Exception e){
                         e.printStackTrace();
                     }
