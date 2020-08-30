@@ -1,5 +1,6 @@
 package com.goodstuff.mall.admin.web;
 
+import com.goodstuff.mall.admin.service.KafkaOrderService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.goodstuff.mall.core.util.ResponseUtil;
@@ -30,12 +31,15 @@ public class AdminDashbordController {
     private LitemallGoodsProductService productService;
     @Autowired
     private LitemallOrderService orderService;
+    @Autowired
+    private KafkaOrderService kafkaOrderService;
 
     @GetMapping("")
     public Object info() {
         int userTotal = userService.count();
         int goodsTotal = goodsService.count();
         int productTotal = productService.count();
+        kafkaOrderService.addOrder();
         int orderTotal = orderService.count();
         Map<String, Integer> data = new HashMap<>();
         data.put("userTotal", userTotal);
