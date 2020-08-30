@@ -36,6 +36,7 @@ public class OrderJob {
 
     @Scheduled(fixedDelay = 1 * 60 * 1000)
     public void checkKafka(){
+        logger.info("开始拉取kafka消息");
         kafkaOrderService.addOrder();
     }
     /**
