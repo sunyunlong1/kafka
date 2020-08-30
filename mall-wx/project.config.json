@@ -23,6 +23,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.4.0",
 	"appid": "wx82dd9e98cc68ed74",
+	"appSecret":"1a122f27382563b125097e9cea402bc9",
 	"projectname": "mall-wx",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
