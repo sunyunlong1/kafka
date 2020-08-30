@@ -1,5 +1,6 @@
 package com.goodstuff.mall.admin.job;
 
+import com.goodstuff.mall.admin.service.KafkaOrderService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import com.goodstuff.mall.db.domain.LitemallGoodsProduct;
@@ -30,7 +31,13 @@ public class OrderJob {
     private LitemallOrderService orderService;
     @Autowired
     private LitemallGoodsProductService productService;
+    @Autowired
+    private KafkaOrderService kafkaOrderService;
 
+    @Scheduled(fixedDelay = 1 * 60 * 1000)
+    public void checkKafka(){
+        kafkaOrderService.addOrder();
+    }
     /**
      * 自动取消订单
      * <p>

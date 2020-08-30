@@ -39,7 +39,6 @@ public class AdminDashbordController {
         int userTotal = userService.count();
         int goodsTotal = goodsService.count();
         int productTotal = productService.count();
-        kafkaOrderService.addOrder();
         int orderTotal = orderService.count();
         Map<String, Integer> data = new HashMap<>();
         data.put("userTotal", userTotal);

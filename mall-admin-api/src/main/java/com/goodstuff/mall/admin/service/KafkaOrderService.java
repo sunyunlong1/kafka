@@ -50,27 +50,16 @@ public class KafkaOrderService {
             Properties properties = initConfig();
             kafkaConsumer = new KafkaConsumer<String, String>(properties);
             kafkaConsumer.subscribe(Arrays.asList(TOPIC));
-            int count = 0;
-            long l = System.currentTimeMillis();
-            flag:
-            while (count > 0) {
+            while (true) {
                 ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
                 for (ConsumerRecord record : records) {
                     try {
-                        LOG.info("日志在这里:"+record);
+                        LOG.info("日志在这里:" + record);
                         LitemallOrder order = JSON.parseObject(record.value().toString(), LitemallOrder.class);
                         orderService.add(order);
-                        count++;
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    if (count == 1) {
-                        break flag;
-                    }
-                }
-                long l1 = System.currentTimeMillis();
-                if((l1 - l)/(1000 * 60) > 1){
-                    break flag;
                 }
             }
 
