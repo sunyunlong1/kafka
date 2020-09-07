@@ -8,12 +8,13 @@ spring:
   datasource:
     druid:
       url:  jdbc:mysql://localhost:3306/mall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&verifyServerCertificate=false&useSSL=false
+#      url:  jdbc:mysql://39.100.126.178:3306/mall?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&verifyServerCertificate=false&useSSL=false
       driver-class-name:  com.mysql.jdbc.Driver
       username:  root
 #     线上密码
-      password:  Syl04!!!!!
+#      password:  Syl04!!!!!
 #      本地密码
-#      password:  18404552888
+      password:  18404552888
       initial-size:  10
       max-active:  50
       min-idle:  10

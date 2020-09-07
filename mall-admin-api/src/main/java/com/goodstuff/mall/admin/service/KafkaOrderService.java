@@ -32,7 +32,7 @@ public class KafkaOrderService {
     private LitemallOrderService orderService;
 
     private static final String TOPIC = "education-info";
-    private static final String BROKER_LIST = "39.100.126.178:9092";
+    private static final String BROKER_LIST = "127.0.0.1:9092";
     private static KafkaConsumer<String, String> kafkaConsumer = null;
 
     private static Properties initConfig() {
